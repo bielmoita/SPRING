@@ -2,6 +2,7 @@ package org.generation.getMoveis.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -12,6 +13,7 @@ import javax.validation.constraints.Size;
 @Table(name= "TB_USUARIO")
 public class Usuario {
 	
+	@Column(name = "codigoCpf")
 	@Id
 	private long codigoCpf;
 	
@@ -34,7 +36,7 @@ public class Usuario {
 		return codigoCpf;
 	}
 
-	public void setCd_cpf(long codigoCpf) {
+	public void setCodigoCpf(long codigoCpf) {
 		this.codigoCpf = codigoCpf;
 	}
 

@@ -1,5 +1,6 @@
 package org.generation.getMoveis.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,14 +15,22 @@ public class Usuario_Compra {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@ManyToOne
-	@JoinColumn(name="usuario_cpf")
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="codigoCpf", referencedColumnName="codigoCpf")
 	private Usuario usuario;
 	
-	@ManyToOne
-	@JoinColumn(name="compra_codigoDaCompra")	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="codigoDaCompra", referencedColumnName="codigoDaCompra")	
 	private Compra compra;
-		
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -37,6 +46,8 @@ public class Usuario_Compra {
 	public void setCompra(Compra compra) {
 		this.compra = compra;
 	}
+		
+	
 
 	
 }
