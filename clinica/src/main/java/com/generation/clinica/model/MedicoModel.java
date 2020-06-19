@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -15,26 +16,26 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="tbMedico")
 public class MedicoModel {
 	@Id
-	private String crm;
+	private Long crm;
 	
 	@Column(name="nome_medico", nullable=false, length=80)
 	@Size(min=2,max=80)
 	private String nome;
 	
 	//Chave estrangeira - relacionada com a tabela especialidade
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JsonIgnoreProperties("medico")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "codigoespecialidade")
 	private EspecialidadeModel especialidade;
 
 	
 	//GETTERS e Setters
 	
 	
-	public String getCrm() {
+	public Long getCrm() {
 		return crm;
 	}
 
-	public void setCrm(String crm) {
+	public void setCrm(Long crm) {
 		this.crm = crm;
 	}
 

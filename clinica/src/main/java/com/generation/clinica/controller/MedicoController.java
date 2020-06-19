@@ -16,15 +16,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.clinica.model.MedicoModel;
+import com.generation.clinica.repository.EspecialidadeRepository;
 import com.generation.clinica.repository.MedicoRepository;
+import com.generation.clinica.dto.MedicoDto;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/medico")
 @CrossOrigin("*")
+@RequiredArgsConstructor
 public class MedicoController {
 	
-	@Autowired
-	private MedicoRepository repositoryMedico;
+	//@Autowired
+	//private MedicoRepository repositoryMedico;
+	
+	private final EspecialidadeRepository especialidadeRepository;
+	
+	private final MedicoRepository medicoRepository;
+	
+	//POST
+	//@PostMapping
+	//public ResponseEntity<MedicoModel> Post
+	//(@RequestBody MedicoModel medico){
+		//return ResponseEntity.status(HttpStatus.CREATED)
+				//.body(repositoryMedico.save(medico));
+	//}
+	@PostMapping
+	public MedicoModel salvar(@RequestBody MedicoDto dto) {
+		long especialidade = dto.getEspecialidade();
+		MedicoModel medico = new MedicoModel();
+		medico.setEspecialidade(especialidade);
+		medico.setCrm(dto.getCrm());
+		medico.setNome(dto.getNome());
+		return medicoRepository.save(medico);
+	}
+	
 	
 	//GET
 	//Pegando a médico pelo código
@@ -51,13 +78,7 @@ public class MedicoController {
 		}
 		
 	
-	//POST
-	@PostMapping
-	public ResponseEntity<MedicoModel> Post
-	(@RequestBody MedicoModel medico){
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(repositoryMedico.save(medico));
-	}
+	
 	
 	//PUT
 	@PutMapping

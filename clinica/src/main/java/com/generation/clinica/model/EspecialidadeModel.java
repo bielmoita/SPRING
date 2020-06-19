@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -15,7 +16,7 @@ public class EspecialidadeModel {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)  //AutoIncremento
-	@JsonIgnoreProperties("especialidade")
+	@Column(name="codEspecialidade")
 	private long codEspecialidade;
 	
 	@Column(name="nomeEspecialidade", nullable=false, length=50)
